@@ -33,17 +33,17 @@ class _AuthScreenState extends State<AuthScreen> {
 
     );
     final data = jsonDecode(response.body);
-    if (response.statusCode == 200) { // Если запрос успешен
-      final jwtToken = data['details']; // Извлекаем JWT-токен
+    if (response.statusCode == 200) {
+      final jwtToken = data['details'];
       final prefs = await SharedPreferences.getInstance();
       await prefs.setString('jwt_token', jwtToken); 
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => HomeScreen(jwtToken: jwtToken)), // Передаем токен
+        MaterialPageRoute(builder: (context) => HomeScreen(jwtToken: jwtToken)),
       );
     } else {
       setState(() {
-        _errorMessage = data['details']; // Сообщение об ошибке
+        _errorMessage = data['details'];
       });
     }
   }
@@ -57,17 +57,16 @@ class _AuthScreenState extends State<AuthScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // Получаем ширину экрана
     final screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
       appBar: AppBar(
         title: Text("Login"),
       ),
-      body: Center( // Центрируем по вертикали и горизонтали
+      body: Center( 
         child: Container( 
-          width: screenWidth * 0.6, // 60% ширины экрана
-          padding: EdgeInsets.all(16), // Отступы внутри контейнера
+          width: screenWidth * 0.9,
+          padding: EdgeInsets.all(16),
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(10),
@@ -107,12 +106,12 @@ class _AuthScreenState extends State<AuthScreen> {
                   },
                 ),
                 SizedBox(height: 16),
-                if (_errorMessage.isNotEmpty) // Проверяем, есть ли сообщение об ошибке
+                if (_errorMessage.isNotEmpty)
                   Padding(
                     padding: const EdgeInsets.only(top: 16),
                     child: Text(
-                      _errorMessage, // Отображаем сообщение об ошибке
-                      style: TextStyle(color: Colors.red), // Цвет текста для ошибок
+                      _errorMessage,
+                      style: TextStyle(color: Colors.red),
                     ),
                   ),
                 SizedBox(height: 20),

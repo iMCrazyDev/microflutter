@@ -40,11 +40,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
       await prefs.setString('jwt_token', jwtToken);
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => HomeScreen(jwtToken: jwtToken)), // Передаем токен
+        MaterialPageRoute(builder: (context) => HomeScreen(jwtToken: jwtToken)),
       );
     } else {
       setState(() {
-        _errorMessage = data['details']; // Сообщение об ошибке
+        _errorMessage = data['details'];
       });
     }
   }
@@ -55,17 +55,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // Получаем ширину экрана
     final screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Login"),
+        title: Text("Registration"),
       ),
-      body: Center( // Центрируем по вертикали и горизонтали
+      body: Center( 
         child: Container( 
-          width: screenWidth * 0.6, // 60% ширины экрана
-          padding: EdgeInsets.all(16), // Отступы внутри контейнера
+          width: screenWidth * 0.9, 
+          padding: EdgeInsets.all(16),
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(10),
@@ -115,12 +114,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   },
                 ),
                 SizedBox(height: 16),
-                if (_errorMessage.isNotEmpty) // Проверяем, есть ли сообщение об ошибке
+                if (_errorMessage.isNotEmpty)
                   Padding(
                     padding: const EdgeInsets.only(top: 16),
                     child: Text(
-                      _errorMessage, // Отображаем сообщение об ошибке
-                      style: TextStyle(color: Colors.red), // Цвет текста для ошибок
+                      _errorMessage,
+                      style: TextStyle(color: Colors.red),
                     ),
                   ),
                 SizedBox(height: 20),
