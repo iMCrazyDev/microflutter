@@ -463,6 +463,9 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }*/
   Future<void> _showToken() async {
+    if (_selectedMaster == null) {
+      return;
+    }
     final response = await http.get(
       Uri.parse(baseUrl + "/master/token?master_id=${_selectedMaster!}"),
       headers: {
